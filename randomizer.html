@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random Son Generator</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#f7f7f5] min-h-screen flex items-center justify-center px-4">
+
+  <div class="bg-white border border-gray-200 rounded-2xl p-8 w-full max-w-md shadow-sm">
+
+    <h1 class="text-2xl font-semibold text-gray-900 mb-8">
+      Random Sanlardi Generatsiya qiliw
+    </h1>
+
+    <!-- Select -->
+    <div class="mb-5">
+      <label class="block text-sm text-gray-500 mb-2">
+        Qanalar sanin belgilen
+      </label>
+
+      <select
+        id="digitSelect"
+        class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gray-300 bg-white text-gray-700">
+
+        <option value="1">1 qanali</option>
+        <option value="2">2 qanali</option>
+        <option value="3">3 qanali</option>
+        <option value="4">4 qanali</option>
+        <option value="5">5 qanali</option>
+        <option value="6">6 qanali</option>
+        <option value="7">7 qanali</option>
+        <option value="8">8 qanali</option>
+        <option value="9">9 qanali</option>
+        <option value="10">10+</option>
+
+      </select>
+    </div>
+
+    <!-- Result -->
+    <div
+      id="result"
+      class="bg-gray-50 border border-gray-200 rounded-xl p-8 text-center text-4xl font-bold text-gray-900 mb-6 tracking-wide break-words">
+      0
+    </div>
+
+    <!-- Button -->
+    <button
+      onclick="generateNumber()"
+      class="w-full bg-black text-white py-3 rounded-xl hover:opacity-90 transition">
+      Generatsiya qiliw
+    </button>
+
+  </div>
+
+  <script>
+    function formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
+    function generateNumber() {
+
+      const digits = parseInt(
+        document.getElementById("digitSelect").value
+      );
+
+      let min = Math.pow(10, digits - 1);
+      let max = Math.pow(10, digits) - 1;
+
+      if (digits === 1) {
+        min = 0;
+      }
+
+      const randomNumber =
+        Math.floor(Math.random() * (max - min + 1)) + min;
+
+      document.getElementById("result").textContent =
+        formatNumber(randomNumber);
+    }
+  </script>
+
+</body>
+</html>
